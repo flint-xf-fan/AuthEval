@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Downloaded ISIC files and generated manifests/caches are not redistributed.
+data/raw/
+data/processed/isic/*
+!data/processed/isic/split_freeze.csv
+!data/processed/isic/phash_exact_duplicate_components.csv
+!data/processed/isic/phash_duplicate_report.csv
+!data/processed/isic/phash_duplicate_summary.md
+!data/processed/isic/phash_final_exact_cross_split_duplicates.csv
+!data/processed/isic/phash_duplicate_failures.csv
+
+# Reproduced outputs are separate from the immutable reference results.
+results/

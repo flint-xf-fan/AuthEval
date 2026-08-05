@@ -1,0 +1,5 @@
+case_id,cluster_id,proposed_action,executed_action,utility_executed_local,utility_proposed_local,utility_proposed_global
+case_001,lesion_001,a0,a0,0.0,0.0,0.0
+case_002,lesion_002,a0,a1,-1.0,-2.0,-1.0
+case_003,lesion_003,a2,a1,-2.0,0.0,-1.0
+case_004,lesion_004,a3,a3,0.0,0.0,0.0

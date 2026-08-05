@@ -1,0 +1,19 @@
+source_score_file: data/processed/isic/vlm_scores_val.csv
+source_manifest_file: data/processed/isic/val.csv
+split: val
+n: 3735
+metric: mean_abs_level_error
+validation_error: 1.129317
+tau:
+  calibrated:
+  - 0.602433
+  - 0.645141
+  - 0.6605
+  over_escalating:
+  - 0.502433
+  - 0.545141
+  - 0.5605
+  under_escalating:
+  - 0.702433
+  - 0.745141
+  - 0.7605

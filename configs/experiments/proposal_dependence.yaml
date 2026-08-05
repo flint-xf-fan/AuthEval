@@ -1,0 +1,22 @@
+analysis_id: proposal_dependence_camera_ready_reproduction
+analysis_status: post_hoc_proposal_dependence_control
+manifest: data/processed/isic/test.csv
+gate_proxy: data/processed/isic/gate_proxy.csv
+medgemma_scores: data/processed/isic/medgemma_risk_v3_scores_test.csv
+readout_lock: artifacts/medgemma_policy_lock.yaml
+frozen_heads: artifacts/frozen_proposal_heads.csv
+
+regime: capacity_ceiling
+slate_size: 4
+context_seed: 20260706
+bootstrap:
+  reps: 5000
+  seed: 20260711
+  quantiles: [0.025, 0.975]
+
+reported_balanced_accuracy:
+  LLaVA-Med head: 0.249
+  MedGemma readout: 0.420
+  CLIP probe: 0.546
+
+output_root: results/proposal_dependence

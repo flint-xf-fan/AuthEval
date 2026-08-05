@@ -1,0 +1,3 @@
+contrast,unit,difference,ci_lower,ci_upper,excludes_zero
+CLIP probe minus LLaVA-Med head,image_weighted,0.8102459478195108,0.6294153721546222,0.9990286739321264,True
+CLIP probe minus LLaVA-Med head,cluster_equal,0.4334473657282338,0.3445043580059754,0.5240302416965493,True

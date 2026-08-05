@@ -1,0 +1,19 @@
+source_score_file: data/processed/isic_clip_probe/clip_probe_scores_val.csv
+source_manifest_file: data/processed/isic/val.csv
+split: val
+n: 3735
+metric: mean_abs_level_error
+validation_error: 0.570549
+tau:
+  calibrated:
+  - 0.459906
+  - 0.551713
+  - 0.662236
+  over_escalating:
+  - 0.359906
+  - 0.451713
+  - 0.562236
+  under_escalating:
+  - 0.559906
+  - 0.651713
+  - 0.762236

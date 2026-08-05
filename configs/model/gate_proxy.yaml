@@ -1,0 +1,18 @@
+seed: 20260710
+data:
+  manifests:
+    train: data/processed/isic/train.csv
+    val: data/processed/isic/val.csv
+    test: data/processed/isic/test.csv
+metadata_model:
+  inputs: [age, sex, anatomic_site]
+  alpha_candidates: [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]
+  temperature_candidates: [0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0]
+outputs:
+  metadata_proxy: data/processed/isic/gate_proxy.csv
+  model: results/isic_gate_proxy/metadata_gate_model.json
+  summary: results/isic_gate_proxy/summary.yaml
+fixed_model_proxies:
+  seed: 20260706
+  noise_width: 0.02
+  sources: []

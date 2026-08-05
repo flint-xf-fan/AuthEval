@@ -1,0 +1,24 @@
+analysis_id: autheval_camera_ready_reproduction
+analysis_status_by_regime:
+  mixed: post_hoc_unit_and_context_repair
+  capacity_ceiling: post_hoc_authority_channel_control
+  safety_floor: post_hoc_authority_channel_control
+manifest: data/processed/isic/test.csv
+scores: data/processed/isic/medgemma_risk_v3_scores_test.csv
+gate_proxy: data/processed/isic/gate_proxy.csv
+readout_lock: artifacts/medgemma_policy_lock.yaml
+
+policy:
+  bias: 0.0
+  policy_id: bias_p000
+  slate_size: 4
+  context_seed: 20260706
+  regimes: [mixed, capacity_ceiling, safety_floor]
+
+bootstrap:
+  reps: 5000
+  seed: 20260711
+  quantiles: [0.025, 0.975]
+  resampling_unit: cluster_id
+
+output_root: results/authority_analysis

@@ -1,0 +1,25 @@
+seed: 20260706
+split_ratios: {train: 0.70, val: 0.15, test: 0.15}
+paths:
+  raw_metadata: data/raw/isic2019/ISIC_2019_Training_Metadata.csv
+  raw_labels:   data/raw/isic2019/ISIC_2019_Training_GroundTruth.csv
+  image_dir:    data/raw/isic2019/ISIC_2019_Training_Input
+  duplicates:   data/raw/isic2019/duplicates.csv   # optional; absent in the official release
+  duplicate_components: data/processed/isic/phash_exact_duplicate_components.csv   # optional exact pHash groups
+  split_freeze: data/processed/isic/split_freeze.csv
+  out_dir:      data/processed/isic
+column_aliases:
+  image_id:      [image, image_id, isic_id, lesion_image_id]
+  image_path:    [image_path, path, filepath, file_path, jpg_path]
+  patient_id:    [patient_id, patient, patient_identifier]
+  lesion_id:     [lesion_id, lesion, lesion_identifier]
+  diagnosis:     [diagnosis, dx, label, target]
+  sex:           [sex, gender]
+  age:           [age, age_approx, age_years]
+  anatomic_site: [anatom_site_general, anatomic_site, localization, lesion_location]
+  source:        [dataset, source, attribution, dataset_name, center, site]
+onehot_diagnosis: [MEL, NV, BCC, AK, AKIEC, BKL, DF, VASC, SCC]
+site_keyword_map:
+  BCN_like: [bcn, barcelona]
+  HAM_like: [ham, ham10000, vidir, rosendahl, vienna]
+  MSK_like: [msk, memorial, sloan]

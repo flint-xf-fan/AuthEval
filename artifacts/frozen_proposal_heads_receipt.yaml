@@ -1,0 +1,16 @@
+artifact: artifacts/frozen_proposal_heads.csv
+sha256: 909d8a3a21d5f6b27c53bc79bae1fc4ea4a65ca375fbbc95ce3e28eafe6777cc
+rows: 3967
+columns: [image_id, llava_med_head, clip_probe_head]
+extraction:
+  regime: capacity_ceiling
+  calibration: calibrated
+  gate_proxy: metadata
+source_sha256:
+  llava_factorial_trace: d34df4e9d62b046f75f5cd5b70f9e0537f943d05215b6293c09c6412a9f7c237
+  clip_probe_factorial_trace: d0b506fb1e28d45f4d5fca56b271aa959ae1f43f89d2db62a04e71a6ad137b3d
+note: >-
+  This compact artifact retains only the operational action head needed to
+  reconstruct each four-action slate. The matched authority process is rebuilt
+  by scripts/run_proposal_dependence_check.py; the superseded authority context
+  from the source traces is not reused.

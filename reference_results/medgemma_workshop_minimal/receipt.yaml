@@ -1,0 +1,41 @@
+analysis_id: medgemma_workshop_minimal_v1
+analysis_status: post_hoc_unit_and_context_repair
+evaluation_unit: image
+cluster_roles:
+- leakage_safe_split
+- shared_simulated_context
+- whole_cluster_bootstrap
+policy:
+  bias: 0.0
+  policy_id: bias_p000
+  slate_size: 4
+  authority_regime: mixed
+  context_seed: 20260706
+bootstrap:
+  reps: 5000
+  seed: 20260711
+  quantiles:
+  - 0.025
+  - 0.975
+  resampling_unit: cluster_id
+  point_estimand: image_weighted
+context_coherence:
+  n_clusters: 2090
+  shared_columns:
+  - site_profile
+  - s_gate
+  - sensitivity_preference
+  - follow_up_burden
+  - invasiveness_aversion
+  max_within_cluster_nunique: 1
+source_sha256:
+  manifest: 682a3e1a53a73b0c5f5f331f5b5bbbc701f644497ffb057cf0189f1c58eeff67
+  scores: c2e1025d8b1426d43373e5ffff697d57ebaad3fcbff4ae5186bb4529419a1237
+  gate_proxy: 7aa9b88993d7e8cd40526b79050fc9525ee5e961c5713197653fbe006c4fc0be
+  policy_lock: 989df9b0aa8a1d88b02503fa8f9191cfb441f3dcb8e155b5093a73e726c397e3
+  prior_test_receipt: 5629ddb33e779a409c5febcf5b47092471672285b00bf351899eb0acd23ed7b8
+  handoff_spec: dd2bfaea32066ca8c76dd84add474e0cc4d95a5e0b05d42f5ea455ce3ca29f24
+output_sha256:
+  trace: e5a57e186ac0a4a3a13c22ded93ee5d9e8c3e235ca760ae1d407a1e75d2a30c6
+  summary_csv: 81c30468a1939f3023e601ced699aa602c2c69d6388d41f6fd96c8f6ba54a674
+  summary_md: 6f9f3f2be9e29368a6f0a3d8cd14fcf96b6a9be44e8c853ba25a0c1dd48ca9ba

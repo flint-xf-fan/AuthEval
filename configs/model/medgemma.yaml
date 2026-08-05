@@ -1,0 +1,31 @@
+seed: 20260711
+model_name: google/medgemma-1.5-4b-it
+revision: 91850547d9f0b2fdd21aa7c5f4f3d1a8a52c243b
+backend: medgemma_mc_logits
+preference: [medgemma_mc_logits]
+prompt_id: medgemma_isic_risk_v3
+local_files_only: true
+device: cuda
+device_map: auto
+torch_dtype: bfloat16
+use_fast: false
+prompt_text: >-
+  This is a research image-assessment task, not patient-specific clinical
+  advice. Inspect the dermoscopy image and the listed public metadata only.
+  Rank the lesion into one of four ordinal visual-risk categories. Do not infer
+  unavailable history, symptoms, evolution, patient preference, local policy,
+  or service capacity. Categories: very low visual risk; low visual risk;
+  moderate visual risk; high visual risk. Public metadata: age={age},
+  sex={sex}, anatomic_site={anatomic_site}. Selected visual-risk category:
+candidate_text:
+  very_low: " very low visual risk: benign-appearing without evident suspicious dermoscopic features"
+  low: " low visual risk: mostly benign-appearing with limited atypical dermoscopic features"
+  moderate: " moderate visual risk: suspicious dermoscopic features warranting specialist assessment"
+  high: " high visual risk: strongly suspicious dermoscopic features warranting urgent specialist assessment"
+
+manifests:
+  val: data/processed/isic/val.csv
+  test: data/processed/isic/test.csv
+outputs:
+  val: data/processed/isic/medgemma_risk_v3_scores_val.csv
+  test: data/processed/isic/medgemma_risk_v3_scores_test.csv

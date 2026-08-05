@@ -1,0 +1,23 @@
+# Frozen site-heterogeneity profile. Disclosed and fixed BEFORE the ISIC run.
+# Do NOT tune after seeing the ISIC sign grid; sensitivity-sweep only.
+global_utility:                 # primary balanced benchmark utility U_glob
+  w_under_bar: 1.20
+  w_over_bar: 1.20
+
+site_profiles:
+  BCN_like:   {interpretation: "high-capacity dermatology service",   cap: 3, conservatism: standard, w_under_site: 1.20, w_over_site: 0.75}
+  HAM_like:   {interpretation: "general mixed dermatology source",     cap: 2, conservatism: standard, w_under_site: 1.20, w_over_site: 1.20}
+  MSK_like:   {interpretation: "specialist safety-oriented service",   cap: 3, conservatism: strict,   w_under_site: 1.80, w_over_site: 0.90}
+  RURAL_like: {interpretation: "low-capacity access-constrained site", cap: 1, conservatism: lenient,  w_under_site: 1.30, w_over_site: 2.00}
+
+patient_multipliers:
+  sensitivity_preference:
+    sens_seeking: {w_under_mult: 1.25, w_over_mult: 0.95}
+    neutral:      {w_under_mult: 1.00, w_over_mult: 1.00}
+    spec_seeking: {w_under_mult: 0.95, w_over_mult: 1.25}
+  follow_up_burden:
+    low:  {w_over_mult: 1.00}
+    high: {w_over_mult: 1.15}
+  invasiveness_aversion:
+    neutral: {w_over_mult: 1.00}
+    averse:  {w_over_mult: 1.20}

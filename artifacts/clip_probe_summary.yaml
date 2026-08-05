@@ -1,0 +1,31 @@
+seed: 20260710
+gate_seed: 20260706
+model_name: openai/clip-vit-large-patch14-336
+backend: frozen_clip_linear_probe
+selection_split: val
+test_used_for_training_or_selection: false
+split_sizes:
+  train: 17629
+  val: 3735
+  test: 3967
+selected_epoch: 79
+training:
+  epochs: 80
+  learning_rate: 0.003
+  weight_decay: 0.001
+  train_batch_size: 1024
+  selection_metric: validation ordinal MAE, then balanced accuracy and macro F1
+validation:
+  n: 3735
+  accuracy: 0.6950468540829987
+  balanced_accuracy: 0.6687987848836875
+  macro_f1: 0.6399536726818755
+  ordinal_mae: 0.5801874163319947
+  best_constant_mae: 1.0714859437751003
+test:
+  n: 3967
+  accuracy: 0.7030501638517772
+  balanced_accuracy: 0.6855144047075437
+  macro_f1: 0.6487841688343916
+  ordinal_mae: 0.5538190068061507
+  best_constant_mae: 1.0862112427527097

@@ -1,0 +1,203 @@
+experiment_id: medgemma_authority_selection_v1
+analysis_status: prospectively_locked_followup_after_prior_null
+selection_split: validation_lock
+test_accessed_by_selection: false
+expected_test_manifest_sha256: 682a3e1a53a73b0c5f5f331f5b5bbbc701f644497ffb057cf0189f1c58eeff67
+seed: 20260711
+simulator_seed: 20260706
+model:
+  model_name: google/medgemma-1.5-4b-it
+  revision: 91850547d9f0b2fdd21aa7c5f4f3d1a8a52c243b
+  backend: medgemma_mc_logits
+  prompt_id: medgemma_isic_risk_v3
+  local_files_only: true
+  device: cuda
+  device_map: auto
+  torch_dtype: bfloat16
+  use_fast: false
+  prompt_text: 'This is a research image-assessment task, not patient-specific clinical
+    advice. Inspect the dermoscopy image and the listed public metadata only. Rank
+    the lesion into one of four ordinal visual-risk categories. Do not infer unavailable
+    history, symptoms, evolution, patient preference, local policy, or service capacity.
+    Categories: very low visual risk; low visual risk; moderate visual risk; high
+    visual risk. Public metadata: age={age}, sex={sex}, anatomic_site={anatomic_site}.
+    Selected visual-risk category:'
+  candidate_text:
+    very_low: ' very low visual risk: benign-appearing without evident suspicious
+      dermoscopic features'
+    low: ' low visual risk: mostly benign-appearing with limited atypical dermoscopic
+      features'
+    moderate: ' moderate visual risk: suspicious dermoscopic features warranting specialist
+      assessment'
+    high: ' high visual risk: strongly suspicious dermoscopic features warranting
+      urgent specialist assessment'
+readout:
+  type: multinomial_logistic_calibration
+  feature_order:
+  - p_very_low
+  - p_low
+  - p_moderate
+  - p_high
+  feature_transform: log_clipped_probability
+  probability_clip: 1.0e-08
+  classes:
+  - 0
+  - 1
+  - 2
+  - 3
+  coef:
+  - - -0.20980844662329695
+    - 0.14517763888027713
+    - 0.1526763003271087
+    - -0.03203222400849858
+  - - 0.0533037959937097
+    - 0.053607081672468464
+    - -0.010146825667282674
+    - -0.0868159803138529
+  - - 0.1911142265278795
+    - -0.029118298202817115
+    - -0.10763996541310807
+    - -0.07856552789971274
+  - - -0.03460957589828497
+    - -0.1696664223499195
+    - -0.034889509246715834
+    - 0.1974137322220708
+  intercept:
+  - 0.12846134949696458
+  - 0.02120935506480866
+  - -0.05703165042020319
+  - -0.09263905414157203
+  selected_C: 0.01
+  selection_metrics:
+    ordinal_mae: 0.9516824849007766
+    balanced_accuracy: 0.4033234354096803
+    macro_f1: 0.3855743209831935
+    accuracy: 0.5077653149266609
+  solver: lbfgs
+  class_weight: balanced
+  max_iter: 2000
+  seed: 20260711
+competence:
+  passed: true
+  checks:
+    min_actions: true
+    max_action_share: true
+    balanced_accuracy: true
+    mae_improvement: true
+    image_shuffle: true
+  metrics:
+    balanced_accuracy: 0.4186867472809902
+    macro_f1: 0.4103413105100151
+    ordinal_mae: 0.8595624558927312
+    accuracy: 0.5532815808045166
+    n: 1417
+    n_actions: 4
+    max_action_share: 0.4918842625264644
+    best_constant_action: 0
+    best_constant_mae: 1.103740296400847
+    mae_improvement_over_best_constant: 0.24417784050811575
+    shuffle_n: 256
+    shuffle_balanced_accuracy: 0.2806444815521628
+    shuffle_ordinal_mae: 1.21875
+    shuffle_bacc_decrease: 0.13195266115352
+    shuffle_mae_increase: 0.375
+    original_subset_balanced_accuracy: 0.4125971427056828
+    original_subset_ordinal_mae: 0.84375
+    n_a0: 697
+    n_a1: 42
+    n_a2: 252
+    n_a3: 426
+  failure_reasons: []
+candidate_policies:
+- policy_id: bias_m060
+  bias: -0.6
+- policy_id: bias_m040
+  bias: -0.4
+- policy_id: bias_m020
+  bias: -0.2
+- policy_id: bias_p000
+  bias: 0.0
+- policy_id: bias_p020
+  bias: 0.2
+- policy_id: bias_p040
+  bias: 0.4
+- policy_id: bias_p060
+  bias: 0.6
+authority:
+  regime: mixed
+  gate_proxy: data/processed/isic/gate_proxy.csv
+  slate_analyses:
+    complete_slate: 4
+    two_slot_existence: 2
+test_acceptance:
+  require_different_policy_ids: true
+  min_executed_value_advantage: 0.05
+  require_positive_ci_lower: true
+bootstrap:
+  reps: 5000
+  seed: 20260711
+  quantiles:
+  - 0.025
+  - 0.975
+  unit: cluster_id
+source_files:
+  experiment_config:
+    path: configs/experiments/medgemma_authority_selection.yaml
+    sha256: e7644044727f8c175fc97a621dddb8aeebb833e3d3f5842dc2edfb2be61008a4
+  simulator_config:
+    path: configs/simulator/site_heterogeneity.yaml
+    sha256: c5348f57d71c6440cfacb8253f00c49b7090e828a9e6528fe9aff676aaf60caf
+  simulator_code:
+    path: src/apeval/sim.py
+    sha256: acfa02eada6c83dd52854b076174fa37cab6790060cc643bd09fa1657666bd5e
+  authority_code:
+    path: src/apeval/authority_selection.py
+    sha256: ae3fa5b74a2cf78de9978bebc03a44cfb67c26167618d65a4f381930a9489862
+  scoring_code:
+    path: src/apeval/models/vlm_cache.py
+    sha256: e7e91a6eeca18530f7d2861c9d4c22a08513dd8885f728f4d9f4002a45d5c1e2
+  runner_code:
+    path: scripts/run_medgemma_authority_selection.py
+    sha256: 538eb8396e2a7a65a1cb8a7348e3cb3ffc02f2c776c52545d836cd98e1a19ab6
+  validation_manifest:
+    path: data/processed/isic/val.csv
+    sha256: 85e7ff5671319c240e757f33335146b18390fb9d3da33542487dbe64b5648025
+  gate_proxy:
+    path: data/processed/isic/gate_proxy.csv
+    sha256: 7aa9b88993d7e8cd40526b79050fc9525ee5e961c5713197653fbe006c4fc0be
+  validation_partition:
+    path: results/medgemma_authority_selection/validation_partition.csv
+    sha256: bcc31d3a58031de6939fdcb6260cfc45cf1e2d12f5418f7e7d3a226d1123ee57
+  validation_scores:
+    path: data/processed/isic/medgemma_risk_v3_scores_val.csv
+    sha256: 1980432777d2a1ceef7578387342529b09b5380f72f98104412af80dc8c9fb06
+  shuffled_lock_scores:
+    path: results/medgemma_authority_selection/medgemma_risk_v3_scores_lock_shuffled.csv
+    sha256: 04d973efc1bcc0b113fd1bbca55b893e0bf89cf2e8f5293b23b83bc923df04a4
+policy_winners:
+  complete_slate:
+    slate_size: 4
+    standard:
+      policy_id: bias_p000
+      bias: 0.0
+      validation_J_std: -1.9833450952717009
+      validation_J: -3.13217254763585
+    authority:
+      policy_id: bias_p000
+      bias: 0.0
+      validation_J_std: -1.9833450952717009
+      validation_J: -3.13217254763585
+    selection_disagreement: false
+  two_slot_existence:
+    slate_size: 2
+    standard:
+      policy_id: bias_p000
+      bias: 0.0
+      validation_J_std: -1.9833450952717009
+      validation_J: -3.0404699894142557
+    authority:
+      policy_id: bias_p000
+      bias: 0.0
+      validation_J_std: -1.9833450952717009
+      validation_J: -3.0404699894142557
+    selection_disagreement: false

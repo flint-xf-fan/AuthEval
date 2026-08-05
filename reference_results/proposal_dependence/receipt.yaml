@@ -1,0 +1,37 @@
+analysis_id: proposal_dependence_v2
+analysis_status: post_hoc_proposal_dependence_control
+evaluation_unit: image
+authority_context: canonical_cluster_shared
+context_builder: apeval.authority_selection.build_authority_context
+context_seed: 20260706
+regime: capacity_ceiling
+calibration: calibrated
+gate_proxy: metadata
+slate_size: 4
+bootstrap:
+  reps: 5000
+  seed: 20260711
+  quantiles:
+  - 0.025
+  - 0.975
+  resampling_unit: cluster_id
+  point_estimand: image_weighted
+n_images: 3967
+n_clusters: 2090
+sources_sha256:
+  manifest: 682a3e1a53a73b0c5f5f331f5b5bbbc701f644497ffb057cf0189f1c58eeff67
+  gate_proxy: 7aa9b88993d7e8cd40526b79050fc9525ee5e961c5713197653fbe006c4fc0be
+  medgemma_scores: c2e1025d8b1426d43373e5ffff697d57ebaad3fcbff4ae5186bb4529419a1237
+  policy_lock: 989df9b0aa8a1d88b02503fa8f9191cfb441f3dcb8e155b5093a73e726c397e3
+  llava_head_trace: d34df4e9d62b046f75f5cd5b70f9e0537f943d05215b6293c09c6412a9f7c237
+  clip_probe_trace: d0b506fb1e28d45f4d5fca56b271aa959ae1f43f89d2db62a04e71a6ad137b3d
+outputs_sha256:
+  proposal_dependence_summary.csv: 7eb1446c08e509e8b1f7120d8d3ac8485ee2b4d4477aee9f8f897ad63fed3ce9
+  paired_contrast.csv: 16fc4757e553492369fe9367a5392e4af18bf81f1a9de7bda41604d026a8b20a
+  case_trace_llava_med_head.csv: e7f695cea7675a4c0d1dff26ff7bf42ec2a4a536ce915309ef12052ece71baba
+  case_trace_medgemma_readout.csv: 5c465f2e0c31916bb2245669efbafdd090f78f856a434d112569635979a3e159
+  case_trace_clip_probe.csv: f8e34894b63e51fffdbef8fdb87b6c70e046464504d9fadec44de7bc4b2c308f
+note: Every arm is scored on the same canonical cluster-shared authority context.
+  The superseded per-image factorial context is not used. Recommender slates are reconstructed
+  from frozen public-input operational heads. The VLM interfaces use image and declared
+  public metadata; the vision-tower probe is image-only.
