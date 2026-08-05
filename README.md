@@ -1,4 +1,4 @@
-# AuthEval: Minimal Camera-Ready Reproduction Package
+# AuthEval: authority-preserving evaluation of medical vision-language assistants
 
 This package accompanies **Authority-Preserving Evaluation of Medical
 Vision-Language Assistants**. It contains the smallest executable subset needed
@@ -153,7 +153,7 @@ capacity-ceiling, and safety-floor review processes. The second keeps the cases,
 gate proxy, simulated private context, utility, clusters, and capacity gate fixed
 while changing the frozen proposal mechanism.
 
-The camera-ready reference values include:
+The reference values are:
 
 | Result | `p` | `delta` | image-weighted `Delta_authority` |
 |---|---:|---:|---:|
@@ -173,9 +173,9 @@ configs/            data, model, simulator, and experiment specifications
 data/processed/     frozen split and duplicate-audit artifacts only
 docs/               AuthEval logging protocol
 examples/           complete synthetic role-separated log
-reference_results/  immutable camera-ready traces, summaries, and receipts
+reference_results/  immutable traces, summaries, and receipts
 scripts/            reproduction scripts
-src/apeval/         minimal imported implementation
+src/apeval/         imported implementation
 tests/              package-level evaluator checks
 ```
 
